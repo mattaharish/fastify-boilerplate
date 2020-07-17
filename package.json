@@ -1,0 +1,37 @@
+{
+  "name": "fastify-boilerplate",
+  "version": "1.0.0",
+  "description": "A full blown production ready boilerplate to build APIs.",
+  "main": "index.js",
+  "engines": {
+    "node": ">=12.10.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mattaharish/fastify-boilerplate.git"
+  },
+  "keywords": [
+    "fastify",
+    "got",
+    "pino",
+    "docker",
+    "prometheus"
+  ],
+  "author": "Harish Matta",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mattaharish/fastify-boilerplate/issues"
+  },
+  "homepage": "https://github.com/mattaharish/fastify-boilerplate#readme",
+  "devDependencies": {
+    "eslint": "^7.4.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "prettier": "2.0.5"
+  }
+}

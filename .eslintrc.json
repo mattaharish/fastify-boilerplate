@@ -1,0 +1,51 @@
+{
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es2020": true,
+    "es6": true,
+    "node": true,
+    "jest": true
+  },
+  "plugins": ["prettier"],
+  "extends": ["google", "eslint:recommended", "plugin:prettier/recommended", "plugin:node/recommended"],
+  "parserOptions": {
+    "ecmaVersion": 2020
+  },
+  "rules": {
+    "strict": ["error", "global"],
+    "no-var": "error",
+    "curly": "off",
+    "semi": ["error"],
+    "no-tabs": ["off", "always"],
+    "new-cap": "off",
+    "no-use-before-define": ["error", { "functions": false, "variables": false }],
+    "no-console": [
+      "error",
+      {
+        "allow": ["time", "timeEnd"]
+      }
+    ],
+    "comma-dangle": ["error", "never"],
+    "max-len": [
+      "error",
+      {
+        "code": 125,
+        "ignoreComments": true,
+        "ignoreTrailingComments": true,
+        "ignoreUrls": true,
+        "ignoreStrings": true,
+        "ignoreTemplateLiterals": true,
+        "ignorePattern": "^\\s*var\\s.+=\\s*require\\s*\\("
+      }
+    ],
+    "brace-style": [
+      "error",
+      "1tbs",
+      {
+        "allowSingleLine": true
+      }
+    ],
+    "complexity": ["error", 10]
+  }
+}
