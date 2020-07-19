@@ -19,6 +19,7 @@
     "semi": ["error"],
     "no-tabs": ["off", "always"],
     "new-cap": "off",
+    "require-jsdoc": "off",
     "no-use-before-define": ["error", { "functions": false, "variables": false }],
     "no-console": [
       "error",

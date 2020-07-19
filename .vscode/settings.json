@@ -4,6 +4,10 @@
     "Matta",
     "Parens",
     "fastify",
-    "pino"
+    "formbody",
+    "healthcheck",
+    "pino",
+    "serializers",
+    "traceid"
   ]
 }
