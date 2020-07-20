@@ -95,6 +95,10 @@ Give an example
 
 Add additional notes about how to deploy this on a live system
 
+## CI
+
+We are using GitHub actions for testing and linting our code.
+
 ## Built With
 
 - [Fastify](https://www.fastify.io/) - Fast and low overhead web framework, for Node.js
