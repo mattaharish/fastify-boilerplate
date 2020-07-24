@@ -1,15 +1,29 @@
 'use strict';
 
+const fs = require('fs');
+const path = require('path');
 const pino = require('pino');
+const multistream = require('pino-multi-stream').multistream;
 
-const pinoLogger = pino({
-  name: 'fastify-boilerplate',
-  level: 'info',
-  redact: {
-    paths: ['password', 'data.password'],
-    censor: '***REDACTED***'
-  }
-});
+const formatError = require('./format-error');
+
+const streams = [
+  { stream: process.stdout },
+  { level: 'debug', stream: fs.createWriteStream(path.join(path.resolve(), '/logs/debug.log')) },
+  { level: 'fatal', stream: fs.createWriteStream(path.join(path.resolve(), '/logs/fatal.log')) }
+];
+
+const pinoLogger = pino(
+  {
+    name: 'fastify-boilerplate',
+    level: 'info',
+    redact: {
+      paths: ['password', 'data.password'],
+      censor: '***REDACTED***'
+    }
+  },
+  multistream(streams)
+);
 
 function LogService(logger = pinoLogger) {
   const logWarnData = ({ module, functionName, metadata, data }) =>
@@ -24,7 +38,7 @@ function LogService(logger = pinoLogger) {
       module,
       functionName,
       message,
-      error,
+      error: formatError(error),
       metadata
     });
 
@@ -35,7 +49,6 @@ function LogService(logger = pinoLogger) {
     logErrorData,
     logWarnData,
     INFO: (...params) => logger.info(...params),
-    VERBOSE: (...params) => logger.verbose(...params),
     TRACE: (...params) => logger.trace(...params),
     WARN: (...params) => logger.warn(...params),
     ERROR: (...params) => logger.error(...params)

@@ -1,4 +1,15 @@
 {
-  "cSpell.words": ["Harish", "Matta", "Parens", "fastify", "formbody", "healthcheck", "pino", "serializers", "traceid"],
+  "cSpell.words": [
+    "Harish",
+    "Matta",
+    "Parens",
+    "fastify",
+    "formbody",
+    "healthcheck",
+    "multistream",
+    "pino",
+    "serializers",
+    "traceid"
+  ],
   "editor.formatOnSave": true
 }

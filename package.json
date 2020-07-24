@@ -45,6 +45,7 @@
     "fastify-plugin": "^2.0.1",
     "make-promises-safe": "^5.1.0",
     "pino": "^6.4.0",
+    "pino-multi-stream": "^5.1.1",
     "pino-pretty": "^4.0.3",
     "under-pressure": "^5.1.0",
     "uuid": "^8.2.0"
