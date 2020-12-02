@@ -4,10 +4,11 @@
   "description": "A full blown production ready boilerplate to build APIs.",
   "main": "index.js",
   "engines": {
-    "node": ">=12.10.0"
+    "node": ">=v14.15.0"
   },
   "scripts": {
-    "test": "echo \"Running tests... \nDone.\" && exit 0",
+    "dev": "nodemon src",
+    "test": "echo \"Running tests... \n Done.\" && exit 0",
     "lint": "eslint ."
   },
   "repository": {
@@ -42,8 +43,10 @@
     "fastify-formbody": "^4.0.3",
     "fastify-healthcheck": "^2.3.1",
     "fastify-helmet": "^4.0.2",
+    "fastify-oas": "^3.0.0-rc.3",
     "fastify-plugin": "^2.0.1",
     "make-promises-safe": "^5.1.0",
+    "nodemon": "^2.0.6",
     "pino": "^6.4.0",
     "pino-multi-stream": "^5.1.1",
     "pino-pretty": "^4.0.3",

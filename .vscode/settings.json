@@ -9,7 +9,11 @@
     "multistream",
     "pino",
     "serializers",
+    "todos",
     "traceid"
   ],
-  "editor.formatOnSave": true
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "eslint.validate": ["javascript"]
 }

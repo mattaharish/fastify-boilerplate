@@ -2,7 +2,7 @@
 const envSchema = require('env-schema');
 
 const { init, run } = require('./server');
-const { config: envConfig } = require('./schemas/env-schema');
+const { config: envConfig } = require('../config/environment-variables');
 const utils = require('./utils');
 
 (async () => {

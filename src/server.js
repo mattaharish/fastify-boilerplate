@@ -1,15 +1,13 @@
 'use strict';
 
-/**
- * * load all plugins
- * * Initiate the roues
- * * Hooks if any
- */
 require('make-promises-safe');
 const fastify = require('fastify');
 const cors = require('fastify-cors');
 const helmet = require('fastify-helmet');
+const oas = require('fastify-oas');
 const healthCheck = require('under-pressure');
+
+const routes = require('./app/routes');
 
 const init = async ({ utils, config }) => {
   const { logger, uuid } = utils;
@@ -25,13 +23,22 @@ const init = async ({ utils, config }) => {
       return true;
     },
     message: 'Under Pressure 😯',
-    exposeStatusRoute: '/liveness'
+    exposeStatusRoute: '/live'
   });
   app.register(require('fastify-formbody'));
-  app.post('/', async (request, reply) => {
-    logger.logDebugData({ data: request.body });
-    reply.send(app.memoryUsage());
+  app.register(oas, {
+    routePrefix: '/documentation',
+    swagger: {
+      externalDocs: {
+        url: 'https://swagger.io',
+        description: 'Find more info here'
+      },
+      consumes: ['application/json'],
+      produces: ['application/json']
+    },
+    exposeRoute: true
   });
+  app.register(routes);
   await app.ready();
   app.log.info('Everything is Loaded..');
   return app;
@@ -39,7 +46,4 @@ const init = async ({ utils, config }) => {
 
 const run = app => app.listen(app.config.port, app.config.host);
 
-module.exports = {
-  init,
-  run
-};
+module.exports = { init, run };
