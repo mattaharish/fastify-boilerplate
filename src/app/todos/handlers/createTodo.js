@@ -1,10 +1,7 @@
 'use strict';
-const { uuid } = require('../../../utils/');
+const { uuid } = require('../../../lib');
 
 exports.handler = async function handler(request, reply) {
-  this.log.info({
-    message: 'Invoking Request for creating a todo'
-  });
   reply.code(201).send({
     todoId: uuid()
   });

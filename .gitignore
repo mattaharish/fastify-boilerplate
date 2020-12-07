@@ -40,3 +40,4 @@ node_modules/
 .env
 .env.test
 
+config/serviceAccountKey.json

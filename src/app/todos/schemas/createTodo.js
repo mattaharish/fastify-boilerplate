@@ -15,8 +15,8 @@ const createTodoResponseSchema = {
 const createTodoRequestSchema = {
   tags: ['Todos'],
   summary: 'This api creates a todo',
-  description: `<ul> * This api let users to add a todo</ul>`,
-  headers: headers,
+  description: `<h3> This API let users to add a Todo </h3>`,
+  headers,
   body: {
     title: 'Create a Todo',
     type: 'object',

@@ -3,11 +3,13 @@
     "Harish",
     "Matta",
     "Parens",
+    "autoload",
     "fastify",
     "formbody",
     "healthcheck",
     "multistream",
     "pino",
+    "redactable",
     "serializers",
     "todos",
     "traceid"

@@ -3,13 +3,16 @@
   "version": "1.0.0",
   "description": "A full blown production ready boilerplate to build APIs.",
   "main": "index.js",
+  "type": "commonjs",
   "engines": {
     "node": ">=v14.15.0"
   },
   "scripts": {
     "dev": "nodemon src",
     "test": "echo \"Running tests... \n Done.\" && exit 0",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "migrate": "knex migrate:latest --debug"
   },
   "repository": {
     "type": "git",
@@ -34,23 +37,39 @@
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-unicorn": "^23.0.0",
+    "husky": "^4.3.4",
     "prettier": "2.0.5"
   },
   "dependencies": {
+    "ajv": "^6.12.6",
+    "ajv-errors": "^1.0.1",
     "env-schema": "^1.1.0",
     "fastify": "^3.1.1",
+    "fastify-autoload": "^3.3.1",
     "fastify-cors": "^4.0.0",
     "fastify-formbody": "^4.0.3",
     "fastify-healthcheck": "^2.3.1",
     "fastify-helmet": "^4.0.2",
     "fastify-oas": "^3.0.0-rc.3",
     "fastify-plugin": "^2.0.1",
+    "firebase-admin": "^9.4.1",
+    "json-stringify-safe": "^5.0.1",
+    "knex": "^0.21.12",
+    "lodash": "^4.17.20",
     "make-promises-safe": "^5.1.0",
     "nodemon": "^2.0.6",
+    "pg": "^8.5.1",
     "pino": "^6.4.0",
     "pino-multi-stream": "^5.1.1",
     "pino-pretty": "^4.0.3",
     "under-pressure": "^5.1.0",
     "uuid": "^8.2.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint",
+      "pre-push": "npm run lint && npm run test"
+    }
   }
 }
