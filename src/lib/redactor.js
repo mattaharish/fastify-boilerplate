@@ -39,6 +39,4 @@ const parser = replacer => o => (!isEmpty(o) ? JSON.parse(stringify(o, replacer)
 
 const redactor = parser(circularReplacer());
 
-module.exports = {
-  redactor
-};
+module.exports = { redactor };

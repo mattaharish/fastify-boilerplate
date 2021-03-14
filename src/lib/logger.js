@@ -3,8 +3,8 @@
 const fs = require('fs');
 const path = require('path');
 const pino = require('pino');
-const rTracer = require('cls-rtracer');
 const multistream = require('pino-multi-stream').multistream;
+const context = require('./asyncContext.js');
 
 const {
   errorSerializer,
@@ -13,7 +13,6 @@ const {
   requestSerializer,
   responseSerializer
 } = require('./serializers');
-const redactor = require('./redactor');
 
 const streams = [
   { stream: process.stdout },
@@ -21,7 +20,7 @@ const streams = [
   { level: 'fatal', stream: fs.createWriteStream(path.join(path.resolve(), '/logs/fatal.log')) }
 ];
 
-const logger = pino(
+const pinoLogger = pino(
   {
     name: 'fastify-boilerplate',
     level: 'info',
@@ -45,33 +44,11 @@ const logger = pino(
   multistream(streams)
 );
 
-const customLogger = (log, severity) => ({
-  module,
-  functionName,
-  data,
-  metadata,
-  message,
-  error
-}) => {
-  log({
-    severity,
-    requestId: rTracer.id(),
-    module,
-    functionName,
-    error,
-    data: redactor(data),
-    metadata,
-    message
-  });
-};
+const logger = new Proxy(pinoLogger, {
+  get(target, property) {
+    const log = context.getStore()?.get('logger') || target;
+    return log[property];
+  }
+});
 
-const INFO = (...params) => logger.info(...params);
-const ERROR = (...params) => logger.error(...params);
-
-module.exports = {
-  logger,
-  INFO,
-  ERROR,
-  logInfo: customLogger(logger.info, 'INFO'),
-  logError: customLogger(logger.error, 'ERROR')
-};
+module.exports = { pinoLogger, logger };

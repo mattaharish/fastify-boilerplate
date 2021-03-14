@@ -30,11 +30,11 @@ const databaseConfiguration = {
     directory: path.resolve(__dirname, './seeds')
   },
   connection: {
-    host: DB_HOST || 'localhost',
-    user: DB_USER || '',
-    password: DB_PASSWORD || '',
-    database: DB_NAME || 'boilerplate',
-    port: DB_PORT || 5432
+    host: DB_HOST,
+    user: DB_USER,
+    password: DB_PASSWORD,
+    database: DB_NAME,
+    port: DB_PORT
   },
   asyncStackTraces: true,
   debug: false

@@ -13,8 +13,7 @@ const requestSerializer = reqSerializer => req => {
     ip,
     headers: redactor(headers),
     params: checkIsEmpty(params),
-    query: checkIsEmpty(query),
-    body: redactor(checkIsEmpty(req.body))
+    query: checkIsEmpty(query)
   };
 };
 
@@ -92,32 +91,12 @@ const enrichHttpError = error => {
   return error;
 };
 
-const onRequestLog = async req => {
-  const { url, method } = req.raw;
-  const msg = `Incoming request for ${method} ${url}`;
-  req.log.info({ req }, msg);
-};
-
-const appendPayloadToResponse = async (_req, res, payload) => {
-  Object.assign(res.raw, { payload });
-};
-
-const onResponseLog = async (req, res) => {
-  const { method, url } = req.raw;
-  const msg = `Response ${res.statusCode} sent for ${method} ${url}`;
-  const responseLog = { req, res, responseTime: res.getResponseTime() };
-  if (res.statusCode < 400) req.log.info(responseLog, msg);
-  else req.log.error(responseLog, msg);
-};
-
 module.exports = {
-  onRequestLog,
-  onResponseLog,
   requestSerializer,
-  appendPayloadToResponse,
   responseSerializer,
   errorSerializer,
   httpRequestSerializer,
   httpResponseSerializer,
-  enrichHttpError
+  enrichHttpError,
+  checkIsEmpty
 };
