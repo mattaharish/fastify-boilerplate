@@ -3,15 +3,17 @@
 const fs = require('fs');
 const path = require('path');
 const pino = require('pino');
+const rTracer = require('cls-rtracer');
 const multistream = require('pino-multi-stream').multistream;
 
 const {
   errorSerializer,
-  redactedHttpRequest,
-  redactedHttpResponse,
+  httpRequestSerializer,
+  httpResponseSerializer,
   requestSerializer,
   responseSerializer
 } = require('./serializers');
+const redactor = require('./redactor');
 
 const streams = [
   { stream: process.stdout },
@@ -24,10 +26,6 @@ const logger = pino(
     name: 'fastify-boilerplate',
     level: 'info',
     messageKey: 'message',
-    redact: {
-      paths: ['password', 'data.password'],
-      censor: '***REDACTED***'
-    },
     formatters: {
       level(label) {
         return { severity: label.toUpperCase() };
@@ -40,11 +38,40 @@ const logger = pino(
       req: requestSerializer(pino.stdSerializers.req),
       res: responseSerializer(pino.stdSerializers.res),
       err: errorSerializer,
-      request: redactedHttpRequest,
-      response: redactedHttpResponse
+      request: httpRequestSerializer,
+      response: httpResponseSerializer
     }
   },
   multistream(streams)
 );
 
-module.exports = { logger };
+const customLogger = (log, severity) => ({
+  module,
+  functionName,
+  data,
+  metadata,
+  message,
+  error
+}) => {
+  log({
+    severity,
+    requestId: rTracer.id(),
+    module,
+    functionName,
+    error,
+    data: redactor(data),
+    metadata,
+    message
+  });
+};
+
+const INFO = (...params) => logger.info(...params);
+const ERROR = (...params) => logger.error(...params);
+
+module.exports = {
+  logger,
+  INFO,
+  ERROR,
+  logInfo: customLogger(logger.info, 'INFO'),
+  logError: customLogger(logger.error, 'ERROR')
+};

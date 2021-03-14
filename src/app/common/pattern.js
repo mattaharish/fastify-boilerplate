@@ -1,7 +1,8 @@
 'use strict';
 
-const PASSWORD = '/^(?=.*[A-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@])(?!.*[iIoO])S{6,12}$/';
-const PHONE_NUMBER = '^[6-9]d{9}$';
+const PASSWORD =
+  '^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[a-zA-Z!@#$%^&?*])[a-zA-Z0-9!@#$%^&?*]{8,20}$';
+const PHONE_NUMBER = '^\\+91[6789][0-9]{9}$';
 
 module.exports = {
   PASSWORD,

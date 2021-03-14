@@ -39,11 +39,13 @@
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-unicorn": "^23.0.0",
     "husky": "^4.3.4",
+    "pino-pretty": "^4.3.0",
     "prettier": "2.0.5"
   },
   "dependencies": {
     "ajv": "^6.12.6",
     "ajv-errors": "^1.0.1",
+    "cls-rtracer": "^2.5.1",
     "env-schema": "^1.1.0",
     "fastify": "^3.1.1",
     "fastify-autoload": "^3.3.1",
@@ -62,7 +64,6 @@
     "pg": "^8.5.1",
     "pino": "^6.4.0",
     "pino-multi-stream": "^5.1.1",
-    "pino-pretty": "^4.0.3",
     "under-pressure": "^5.1.0",
     "uuid": "^8.2.0"
   },

@@ -1,13 +1,12 @@
 'use strict';
 
 const { PASSWORD, PHONE_NUMBER } = require('../../common/pattern');
-const { headers, errorSchemas } = require('../../common/schema');
+const { errorSchemas } = require('../../common/schema');
 
 const request = {
   tags: ['Auth'],
   summary: 'Register a new  user',
   description: `<h3> This API let new users to register </h3>`,
-  headers,
   body: {
     title: 'Register New User',
     type: 'object',

@@ -8,7 +8,7 @@ const helmet = require('fastify-helmet');
 const oas = require('fastify-oas');
 const healthCheck = require('under-pressure');
 const autoload = require('fastify-autoload');
-
+const rTracer = require('cls-rtracer');
 const utils = require('./lib');
 const routes = require('./app/routes');
 
@@ -54,12 +54,17 @@ const init = async ({ config }) => {
     dir: path.join(__dirname, 'plugins'),
     ignorePattern: /^(__tests__)/
   });
+  app.register(rTracer.fastifyPlugin, {
+    useHeader: true,
+    headerName: 'x-request-id',
+    useFastifyRequestId: true
+  });
   app.register(routes);
   app.addHook('onRequest', onRequestLog);
   app.addHook('preSerialization', appendPayloadToResponse);
   app.addHook('onResponse', onResponseLog);
   await app.ready();
-  logger.info('Everything is Loaded..!');
+  app.log.info('Everything is Loaded..!');
   return app;
 };
 
