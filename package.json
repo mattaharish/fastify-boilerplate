@@ -57,7 +57,7 @@
     "firebase-admin": "^9.4.1",
     "json-stringify-safe": "^5.0.1",
     "knex": "^0.21.12",
-    "lodash": "^4.17.20",
+    "lodash": "^4.17.21",
     "make-promises-safe": "^5.1.0",
     "nodemon": "^2.0.6",
     "pg": "^8.5.1",
