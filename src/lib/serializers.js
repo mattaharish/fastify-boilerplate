@@ -2,6 +2,7 @@
 
 const { isEmpty } = require('lodash');
 const { redactor } = require('./redactor');
+const asyncHooks = require('async_hooks');
 
 const checkIsEmpty = data => (isEmpty(data) ? undefined : data);
 
@@ -13,7 +14,8 @@ const requestSerializer = reqSerializer => req => {
     ip,
     headers: redactor(headers),
     params: checkIsEmpty(params),
-    query: checkIsEmpty(query)
+    query: checkIsEmpty(query),
+    aid: asyncHooks.executionAsyncId()
   };
 };
 
