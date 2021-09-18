@@ -35,7 +35,7 @@ const circularReplacer = () => {
   };
 };
 
-const parser = replacer => o => (!isEmpty(o) ? JSON.parse(stringify(o, replacer)) : o);
+const parser = replacer => o => !isEmpty(o) ? JSON.parse(stringify(o, replacer)) : o;
 
 const redactor = parser(circularReplacer());
 

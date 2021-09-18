@@ -49,7 +49,17 @@ const init = async ({ config }) => {
   });
   app.decorate('config', config);
   app.register(cors);
-  app.register(helmet, { noCache: true, policy: 'same-origin' });
+  app.register(helmet, {
+    noCache: true,
+    policy: 'same-origin',
+    contentSecurityPolicy: {
+      useDefaults: true,
+      directives: {
+        imgSrc: ["'self'", 'data:'],
+        scriptSrc: ["'self' 'unsafe-inline'"]
+      }
+    }
+  });
   app.register(underPressure, underPressureConfig());
   app.register(require('fastify-formbody'));
   app.register(swagger, swaggerConfig());

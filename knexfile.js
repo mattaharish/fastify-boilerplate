@@ -5,15 +5,8 @@ const envSchema = require('env-schema');
 const { config: envConfig } = require('./config/environmentVariables');
 const config = envSchema(envConfig);
 
-const {
-  DB_HOST,
-  DB_USER,
-  DB_PASSWORD,
-  DB_NAME,
-  DB_PORT,
-  DB_MIN_CONNECTIONS,
-  DB_MAX_CONNECTIONS
-} = config;
+const { DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT, DB_MIN_CONNECTIONS, DB_MAX_CONNECTIONS } =
+  config;
 
 const databaseConfiguration = {
   client: 'postgres',
