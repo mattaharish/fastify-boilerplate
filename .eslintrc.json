@@ -7,26 +7,61 @@
     "node": true,
     "jest": true
   },
-  "plugins": ["prettier", "unicorn"],
+  "plugins": [
+    "prettier",
+    "unicorn"
+  ],
   "extends": [
     "google",
     "eslint:recommended",
     "plugin:prettier/recommended",
     "plugin:node/recommended"
   ],
-  "parserOptions": { "ecmaVersion": 2020 },
+  "parserOptions": {
+    "ecmaVersion": 2021
+  },
   "rules": {
-    "strict": ["error", "global"],
+    "strict": [
+      "error",
+      "global"
+    ],
     "no-var": "error",
     "curly": "off",
-    "semi": ["error"],
-    "no-tabs": ["off", "always"],
+    "semi": [
+      "error"
+    ],
+    "no-tabs": [
+      "off",
+      "always"
+    ],
     "new-cap": "off",
     "require-jsdoc": "off",
-    "no-param-reassign": ["error", { "props": true }],
-    "no-use-before-define": ["error", { "functions": false, "variables": false }],
-    "no-console": ["error", { "allow": ["time", "timeEnd"] }],
-    "comma-dangle": ["error", "never"],
+    "no-param-reassign": [
+      "error",
+      {
+        "props": true
+      }
+    ],
+    "no-use-before-define": [
+      "error",
+      {
+        "functions": false,
+        "variables": false
+      }
+    ],
+    "no-console": [
+      "error",
+      {
+        "allow": [
+          "time",
+          "timeEnd"
+        ]
+      }
+    ],
+    "comma-dangle": [
+      "error",
+      "never"
+    ],
     "max-len": [
       "error",
       {
@@ -39,10 +74,27 @@
         "ignorePattern": "^\\s*var\\s.+=\\s*require\\s*\\("
       }
     ],
-    "brace-style": ["error", "1tbs", { "allowSingleLine": true }],
-    "complexity": ["warn", 6],
+    "brace-style": [
+      "error",
+      "1tbs",
+      {
+        "allowSingleLine": true
+      }
+    ],
+    "complexity": [
+      "warn",
+      6
+    ],
     "import/no-extraneous-dependencies": 0,
     "require-atomic-updates": 0,
-    "unicorn/filename-case": ["error", { "case": "camelCase" }]
+    "unicorn/filename-case": [
+      "error",
+      {
+        "case": "camelCase",
+        "ignore": [
+          "migrations/*"
+        ]
+      }
+    ]
   }
 }

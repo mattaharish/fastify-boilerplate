@@ -5,14 +5,15 @@
   "main": "index.js",
   "type": "commonjs",
   "engines": {
-    "node": ">=v14.15.0"
+    "node": ">=v16.15.0"
   },
   "scripts": {
     "dev": "nodemon src",
     "test": "echo \"Running tests... \n Done.\" && exit 0",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "migrate": "knex migrate:latest --debug"
+    "migrate": "knex migrate:latest --debug",
+    "migrate:make": "knex -- migrate:make"
   },
   "repository": {
     "type": "git",
@@ -32,39 +33,38 @@
   },
   "homepage": "https://github.com/mattaharish/fastify-boilerplate#readme",
   "devDependencies": {
-    "eslint": "^7.32.0",
+    "eslint": "^8.16.0",
     "eslint-config-google": "^0.14.0",
-    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-unicorn": "^36.0.0",
-    "husky": "^7.0.2",
-    "pino-pretty": "^7.0.1",
-    "prettier": "2.4.1"
+    "eslint-plugin-unicorn": "^42.0.0",
+    "husky": "^8.0.1",
+    "pino-pretty": "^7.6.1",
+    "prettier": "2.6.2"
   },
   "dependencies": {
-    "ajv": "^8.6.3",
+    "@fastify/autoload": "^4.0.0",
+    "@fastify/cors": "^7.0.0",
+    "@fastify/formbody": "^6.0.0",
+    "ajv": "^8.11.0",
     "ajv-errors": "^3.0.0",
     "ajv-formats": "^2.1.1",
     "env-schema": "^3.4.0",
     "fastify": "^3.21.3",
-    "fastify-autoload": "^3.9.0",
-    "fastify-cors": "^6.0.2",
-    "fastify-formbody": "^5.1.0",
     "fastify-healthcheck": "^3.1.0",
     "fastify-helmet": "^5.3.2",
     "fastify-plugin": "^3.0.0",
-    "fastify-swagger": "^4.12.0",
-    "firebase-admin": "^9.11.1",
+    "fastify-swagger": "^4.17.1",
     "json-stringify-safe": "^5.0.1",
-    "knex": "^0.95.11",
+    "knex": "^2.1.0",
     "lodash": "^4.17.21",
     "make-promises-safe": "^5.1.0",
-    "nodemon": "^2.0.12",
-    "pg": "^8.7.1",
-    "pino": "^6.13.2",
-    "pino-multi-stream": "^5.3.0",
-    "under-pressure": "^5.7.0",
+    "nodemon": "^2.0.16",
+    "pg": "^8.7.3",
+    "pino": "^7.11.0",
+    "pino-multi-stream": "^6.0.0",
+    "under-pressure": "^5.8.1",
     "uuid": "^8.3.2"
   },
   "husky": {

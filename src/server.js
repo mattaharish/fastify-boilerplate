@@ -3,11 +3,11 @@
 require('make-promises-safe');
 const path = require('path');
 const fastify = require('fastify');
-const cors = require('fastify-cors');
+const cors = require('@fastify/cors');
 const helmet = require('fastify-helmet');
 const swagger = require('fastify-swagger');
 const underPressure = require('under-pressure');
-const autoload = require('fastify-autoload');
+const autoload = require('@fastify/autoload');
 const lib = require('./lib');
 const routes = require('./app/routes');
 const { requestContext, onResponse, appendPayloadToResponse } = require('./hooks');
@@ -61,7 +61,7 @@ const init = async ({ config }) => {
     }
   });
   app.register(underPressure, underPressureConfig());
-  app.register(require('fastify-formbody'));
+  app.register(require('@fastify/formbody'));
   app.register(swagger, swaggerConfig());
   app.register(autoload, {
     dir: path.join(__dirname, 'plugins'),
