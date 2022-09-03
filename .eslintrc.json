@@ -95,6 +95,7 @@
           "migrations/*"
         ]
       }
-    ]
+    ],
+    "no-unused-vars": "error",
   }
 }

@@ -4,13 +4,14 @@ require('make-promises-safe');
 const path = require('path');
 const fastify = require('fastify');
 const cors = require('@fastify/cors');
-const helmet = require('fastify-helmet');
-const swagger = require('fastify-swagger');
-const underPressure = require('under-pressure');
+const helmet = require('@fastify/helmet');
+const swagger = require('@fastify/swagger');
+const underPressure = require('@fastify/under-pressure');
 const autoload = require('@fastify/autoload');
 const lib = require('./lib');
 const routes = require('./app/routes');
 const { requestContext, onResponse, appendPayloadToResponse } = require('./hooks');
+const setupGracefulShutdown = require('./shutdown');
 
 const underPressureConfig = () => {
   return {
@@ -73,9 +74,10 @@ const init = async ({ config }) => {
   app.addHook('onResponse', onResponse);
   await app.ready();
   logger.info('Everything is Loaded..!');
+  setupGracefulShutdown({ fastify: app });
   return app;
 };
 
-const run = app => app.listen(app.config.PORT, app.config.HOST);
+const run = app => app.listen({ port: app.config.PORT, host: app.config.HOST });
 
 module.exports = { init, run };

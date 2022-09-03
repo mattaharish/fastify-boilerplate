@@ -1,28 +1,31 @@
 {
   "cSpell.words": [
-    "Harish",
-    "Matta",
-    "Parens",
-    "Xncn",
-    "Zmdz",
-    "Zyjsro",
     "appspot",
     "autoload",
     "errorable",
     "fastify",
     "firebaseapp",
     "formbody",
+    "Harish",
     "healthcheck",
+    "Matta",
     "multistream",
+    "Parens",
     "pino",
+    "querybuilder",
     "redactable",
     "rtracer",
     "serializers",
     "todos",
-    "traceid"
+    "traceid",
+    "Xncn",
+    "Zmdz",
+    "Zyjsro"
   ],
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
-  "eslint.validate": ["javascript"]
+  "eslint.validate": [
+    "javascript"
+  ]
 }

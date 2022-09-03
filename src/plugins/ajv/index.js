@@ -21,6 +21,6 @@ async function ajvCompiler(fastify, options) {
 }
 
 module.exports = fp(ajvCompiler, {
-  fastify: '>=3.0.0',
+  fastify: '>=4.0.0',
   name: 'ajv-compiler'
 });
