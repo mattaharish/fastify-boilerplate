@@ -59,7 +59,7 @@
     "fastify-healthcheck": "^4.2.0",
     "fastify-plugin": "^4.2.1",
     "json-stringify-safe": "^5.0.1",
-    "knex": "^2.3.0",
+    "knex": "^2.4.0",
     "lodash": "^4.17.21",
     "make-promises-safe": "^5.1.0",
     "nodemon": "^2.0.19",
