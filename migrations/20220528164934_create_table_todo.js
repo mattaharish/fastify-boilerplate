@@ -2,6 +2,8 @@
 'use strict';
 
 exports.up = async knex => {
+  const tableExists = await knex.schema.hasTable('todo');
+  if (tableExists) return;
   await knex.schema.createTable('todo', table => {
     table.increments('id');
     table.uuid('todo_id').notNullable().unique().defaultTo(knex.raw('uuid_generate_v4()'));
@@ -11,10 +13,10 @@ exports.up = async knex => {
     table.string('label');
     table.string('due_date');
     table.boolean('priority');
-    table.timestamp('createdAt').notNullable().defaultTo(knex.fn.now());
-    table.timestamp('updatedAt').notNullable().defaultTo(knex.fn.now());
-    table.string('createdBy').notNullable();
-    table.string('updatedBy').notNullable();
+    table.timestamp('created_at');
+    table.timestamp('updated_at');
+    table.string('created_by');
+    table.string('updated_by');
   });
 };
 

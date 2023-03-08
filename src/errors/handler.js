@@ -1,31 +1,29 @@
 'use strict';
 
-function validationErrorMessage(error, context) {
-  const { dataPath, message, params } = error;
-  const prefix = `${context || ''}${dataPath || ''}`;
-  const paddedPrefix = prefix ? `${prefix} ` : '';
-  const allowedValues =
-    params && Array.isArray(params.allowedValues)
-      ? `: ${params.allowedValues.map(v => `'${v}'`).join(', ')}`
-      : '';
-  return `${paddedPrefix}${message}${allowedValues}`;
-}
+const CustomError = require('./CustomError');
+const { DEFAULT_MAPPERS } = require('./mappers');
+const { getRequest, getError } = require('./helpers');
 
-const errorHandler = (error, request, reply) => {
-  if (Array.isArray(error.validation)) {
-    const body = {
-      errors: error.validation.map(err => ({
-        code: 'REQUEST_VALIDATION_ERROR',
-        message: validationErrorMessage(err, error.validationContext)
-      }))
-    };
-    reply.code(400);
-    reply.type('application/json');
-    reply.send(body);
-    return;
-  }
-};
+module.exports =
+  (mappers = DEFAULT_MAPPERS, options) =>
+  (error, request, reply) => {
+    request.log.error({
+      request: getRequest(request),
+      error: getError(error),
+      log_trace: request.logTrace,
+      message: 'Error while processing request'
+    });
+    for (const mapper of mappers) {
+      const resp = mapper(error, options);
+      if (resp) {
+        return reply.code(resp.code).send(resp.response);
+      }
+    }
+    const unhandledError = CustomError.create({
+      httpCode: 500,
+      code: 'INTERNAL_SERVER_ERROR',
+      message: 'Something Went Wrong'
+    });
 
-module.exports = {
-  errorHandler
-};
+    return reply.code(unhandledError.code).send(unhandledError.response);
+  };

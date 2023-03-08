@@ -11,7 +11,6 @@ const getKnexClient = async ({ options }) => {
     const db = knex({ ...options });
     await connectionCheck(db);
     setupPaginator(db);
-    await connectionCheck(db);
     return db;
   } catch (e) {
     logger.error({ message: `DB connection failed`, err: e });

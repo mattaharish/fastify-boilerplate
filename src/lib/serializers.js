@@ -20,7 +20,7 @@ const requestSerializer = reqSerializer => req => {
 };
 
 const responseSerializer = resSerializer => res => {
-  return { ...resSerializer(res), body: redactor(res.raw.payload) };
+  return { ...resSerializer(res), body: redactor(res.raw.payload), statusCode: res.statusCode };
 };
 
 const errorSerializer = error => {

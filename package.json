@@ -8,13 +8,16 @@
     "node": ">=v16.15.0"
   },
   "scripts": {
-    "dev": "nodemon src",
+    "dev": "nodemon src | pino-pretty -c -t -l severity",
     "test": "echo \"Running tests... \n Done.\" && exit 0",
     "lint": "eslint . -c .eslintrc.json --ext js --fix",
     "lint:fix": "eslint --fix .",
     "knex": "node -r dotenv/config ./node_modules/.bin/knex",
+    "migrate:make": "knex -- migrate:make",
     "migrate": "npm run knex -- migrate:latest --debug --knexfile ./config/knexConfig.js",
-    "migrate:make": "knex -- migrate:make"
+    "migrate:down": "npm run knex -- migrate:down --debug --knexfile ./config/knexConfig.js",
+    "seed:make": "npm run knex -- seed:make --debug --knexfile ./config/knexConfig.js",
+    "seed": "npm run knex -- seed:run --debug --knexfile ./config/knexConfig.js"
   },
   "repository": {
     "type": "git",
@@ -34,7 +37,6 @@
   },
   "homepage": "https://github.com/mattaharish/fastify-boilerplate#readme",
   "devDependencies": {
-    "nodemon": "^2.0.19",
     "eslint": "^8.35.0",
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^8.7.0",
@@ -42,6 +44,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-unicorn": "^46.0.0",
     "husky": "^8.0.3",
+    "nodemon": "^2.0.19",
     "pino-pretty": "^9.4.0",
     "prettier": "2.8.4"
   },
@@ -59,6 +62,7 @@
     "fastify": "^4.14.1",
     "fastify-healthcheck": "^4.4.0",
     "fastify-plugin": "^4.5.0",
+    "http-status-codes": "^2.2.0",
     "json-stringify-safe": "^5.0.1",
     "knex": "^2.4.2",
     "lodash": "^4.17.21",

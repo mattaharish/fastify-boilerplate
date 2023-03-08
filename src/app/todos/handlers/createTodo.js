@@ -1,8 +1,16 @@
 'use strict';
-const { uuid } = require('../../../lib');
+const { CREATED } = require('http-status-codes').StatusCodes;
 
-exports.handler = async function handler(request, reply) {
-  reply.code(201).send({
-    todoId: uuid()
+const { createTodo: createTodoService } = require('../services');
+
+const createTodo = fastify => async (request, reply) => {
+  const { body, logTrace } = request;
+  const createdTodo = await createTodoService({
+    fastify,
+    logTrace,
+    todo: body
   });
+  return reply.code(CREATED).send(createdTodo);
 };
+
+module.exports = createTodo;
